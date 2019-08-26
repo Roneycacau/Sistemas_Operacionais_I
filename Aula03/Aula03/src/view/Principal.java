@@ -7,9 +7,9 @@ public class Principal {
     public static void main(String[] args) {
         ProController pc = new ProController();
 //
-//        String so = pc.os();
+        String so = pc.os();
 //
-//        System.out.println(so);
+        System.out.println(so);
 //
         String processo = "tasklist /fo table";
 //
