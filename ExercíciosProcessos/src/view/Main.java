@@ -5,12 +5,12 @@ import controller.RedesController;
 public class Main {
 
 	public static void main(String[] args) {
-		RedesController controle = new RedesController();
-		String so = controle.OperationalSystem();
+		RedesController controller = new RedesController();
+		String os = controller.OperationalSystem();
 		
-		System.out.println(so);
+		System.out.println(os);
 		
-		controle.ip(so);
+		controller.ip(os);
 	}
 
 }

@@ -18,24 +18,24 @@ public class RedesController {
 		String ip = "";
     	try {
 			Process p = Runtime.getRuntime().exec(process);
-			InputStream fluxo = p.getInputStream();
-			InputStreamReader leitor = new InputStreamReader(fluxo);
-			BufferedReader buffer = new BufferedReader(leitor);
-			String linha = buffer.readLine();
-			while(linha != null ) {
+			InputStream flow = p.getInputStream();
+			InputStreamReader reader = new InputStreamReader(flow);
+			BufferedReader buffer = new BufferedReader(reader);
+			String row = buffer.readLine();
+			while(row != null ) {
 				
-				if(linha.contains("Adaptador")||linha.contains("en")||linha.contains("en")||linha.contains("wl")) {
-					if(linha.contains("en")||linha.contains("en")||linha.contains("wl")) {
-						adapter = linha.substring(0, (linha.indexOf(":")-1 	));
+				if(row.contains("Adaptador")||row.contains("en")||row.contains("en")||row.contains("wl")) {
+					if(row.contains("en")||row.contains("en")||row.contains("wl")) {
+						adapter = row.substring(0, (row.indexOf(":")-1 	));
 					}else {
-					adapter = linha;
+					adapter = row;
 					}
 				}
-				if(linha.contains("IPv4")||linha.contains("inet ")) {
-					if(linha.contains("inet ")) {
-						adapter = linha.substring(0, (linha.lastIndexOf("netmask")));
+				if(row.contains("IPv4")||row.contains("inet ")) {
+					if(row.contains("inet ")) {
+						adapter = row.substring(0, (row.lastIndexOf("netmask")));
 					}else{
-						ip = linha;
+						ip = row;
 					}
 				}
 				if(adapter != "" && ip!= "") {
@@ -43,11 +43,11 @@ public class RedesController {
 					ip = "";
 			
 				}
-				linha = buffer.readLine();
+				row = buffer.readLine();
 			}
 			buffer.close();
-			leitor.close();
-			fluxo.close();		
+			reader.close();
+			flow.close();		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
