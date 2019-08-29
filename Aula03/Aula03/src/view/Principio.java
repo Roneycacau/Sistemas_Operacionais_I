@@ -2,7 +2,7 @@ package view;
 
 import controller.ProController;
 
-public class Principal {
+public class Principio {
 
     public static void main(String[] args) {
         ProController pc = new ProController();
