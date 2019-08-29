@@ -10,11 +10,11 @@ public class Main {
 		RedesController controller = new RedesController();
 		String os = controller.OperationalSystem();
 		int op = 0;
-		
-		System.out.println(os);
-		
 		do {
-			op = Integer.parseInt(JOptionPane.showInputDialog("Escolhe ai!"));
+			op = Integer.parseInt(JOptionPane.showInputDialog("Escolhe ai!"
+					+ "\n[1] Ver adaptadores de rede e IPv4"
+					+ "\n[2] Calcular a latência da rede"
+					+ "\n[9] Finalizar"));
 			switch(op) {
 			case 1:
 				controller.ip(os);

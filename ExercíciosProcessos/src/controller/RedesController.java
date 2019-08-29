@@ -12,47 +12,17 @@ public class RedesController {
 		return os;
 	}
 
-	public String callProcess(String process, String adapterSubstringStart, String adapterSubstringEnd,
-			String ipSubstringStart, String ipSubstringEnd, String containsAdapterIdentifier,
-			String containsIpIdentifier) {
+	public String callProcess(String process, String os) {
 		String message = "";
-		String adapter = "";
-		String ip = "";
 		try {
 			Process p = Runtime.getRuntime().exec(process);
 			InputStream flow = p.getInputStream();
 			InputStreamReader reader = new InputStreamReader(flow);
 			BufferedReader buffer = new BufferedReader(reader);
 			String row = buffer.readLine();
-			while (row != null) {
-				if (process.contains("ip")) {
-					if (row.contains(containsAdapterIdentifier)) {
-						adapter = row.substring(row.indexOf(adapterSubstringStart),
-								row.lastIndexOf(adapterSubstringEnd));
-					} else if (row.contains(containsAdapterIdentifier)) {
-						adapter = row;
-					}
 
-					if (row.contains(containsIpIdentifier)) {
-						ip = row.substring(row.indexOf(ipSubstringStart) + 1, row.lastIndexOf(ipSubstringEnd));
-					} else if (row.contains(containsIpIdentifier)) {
-						ip = row;
-					}
+			message = formatString(buffer, row, process, os, message);
 
-					if (adapter != "" && ip != "") {
-						message += adapter.trim() + ": " + ip.trim() + "\n";
-						ip = "";
-
-					}
-					row = buffer.readLine();
-				}else {
-					if(process.contains("-n")) {
-						
-					}else if(process.contains("-c")) {
-						
-					}
-				}
-			}
 			buffer.close();
 			reader.close();
 			flow.close();
@@ -63,44 +33,113 @@ public class RedesController {
 		return message;
 	}
 
-	public void ip(String os) {
+	private String formatString(BufferedReader buffer, String row, String process, String os, String message) {
+		String adapter = "";
+		String ip = "";
+		while (row != null) {
+			if (process.contains("ip")) {
+				if (os.contains("Windows")) {
+					String adapterSubstringStart = "Adaptador";
+					String adapterSubstringEnd = ":";
+					String ipSubstringStart = ": ";
+					String ipSubstringEnd = "";
+					String containsAdapterIdentifier = "Adaptador";
+					String containsIpIdentifier = "IPv4";
+					if (row.contains(containsAdapterIdentifier)) {
+						adapter = row.substring(row.indexOf(adapterSubstringStart),
+								row.lastIndexOf(adapterSubstringEnd));
+					}
+					if (row.contains(containsIpIdentifier)) {
+						ip = row.substring(row.indexOf(ipSubstringStart) + 1, row.lastIndexOf(ipSubstringEnd));
+					}
+					if (adapter != "" && ip != "") {
+						message += adapter.trim() + ": " + ip.trim() + "\n";
+						ip = "";
+					}
+				} else if (os.contains("Linux")) {
+					String adapterSubstringStart = " ";
+					String adapterSubstringEnd = ":";
+					String ipSubstringStart = "t ";
+					String ipSubstringEnd = "/";
+					String containsAdapterIdentifier = "mtu";
+					String containsIpIdentifier = "inet ";
 
+					if (row.contains(containsAdapterIdentifier)) {
+						adapter = row.substring(row.indexOf(adapterSubstringStart),
+								row.lastIndexOf(adapterSubstringEnd));
+					}
+					if (row.contains(containsIpIdentifier)) {
+						ip = row.substring(row.indexOf(ipSubstringStart) + 1, row.lastIndexOf(ipSubstringEnd));
+					}
+					if (adapter != "" && ip != "") {
+						message += adapter.trim() + ": " + ip.trim() + "\n";
+						ip = "";
+					}
+				}
+				try {
+					row = buffer.readLine();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				if (process.contains("-n")) {
+					System.out.print("Calculando");
+					while (row != null) {
+						System.out.print(".");
+						if(row.contains("dia")) {
+							System.out.println("DONE");
+							String latencia = row.substring(row.lastIndexOf("="));
+							System.out.println(latencia.trim());
+						try {
+							row = buffer.readLine();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				} else if (process.contains("-c")) {
+					System.out.print("Calculando");
+					while (row != null) {
+						System.out.print(".");
+						if (row.contains("/")) {
+							String[] splitedString = row.split("/");
+							System.out.println("DONE");System.out.println("Latencia: " + splitedString[4] + "ms");
+						}
+						try {
+							row = buffer.readLine();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+
+		}
+		return message;
+
+	}
+
+	public void ip(String os) {
 		if (os.contains("Windows")) {
 			String process = "ipconfig";
-			String adapterSubstringStart = "Adaptador";
-			String adapterSubstringEnd = ":";
-			String ipSubstringStart = ": ";
-			String ipSubstringEnd = "";
-			String containsAdapterIdentifier = "Adaptador";
-			String containsIpIdentifier = "IPv4";
-
-			System.out.println(callProcess(process, adapterSubstringStart, adapterSubstringEnd, ipSubstringStart,
-					ipSubstringEnd, containsAdapterIdentifier, containsIpIdentifier));
-
+			System.out.println(callProcess(process, os));
 		} else if (os.contains("Linux")) {
 			String process = "ip address";
-			String adapterSubstringStart = " ";
-			String adapterSubstringEnd = ":";
-			String ipSubstringStart = "t ";
-			String ipSubstringEnd = "/";
-			String containsAdapterIdentifier = "mtu";
-			String containsIpIdentifier = "inet ";
-
-			System.out.println(callProcess(process, adapterSubstringStart, adapterSubstringEnd, ipSubstringStart,
-					ipSubstringEnd, containsAdapterIdentifier, containsIpIdentifier));
-
+			System.out.println(callProcess(process, os));
 		} else {
 			System.out.println("SO não reconhecido");
 		}
 	}
 
 	public void ping(String os) {
-		String process;
-		if(os.contains("Windows")) {
+		String process = "";
+		if (os.contains("Windows")) {
 			process = "ping -n 10 ";
-		}else if(os.contains("Linux")) {
+		} else if (os.contains("Linux")) {
 			process = "ping -c 10 google.com";
+			System.out.println(callProcess(process, os));
 		}
 
 	}
+
 }
