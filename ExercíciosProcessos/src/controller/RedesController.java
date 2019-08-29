@@ -12,7 +12,9 @@ public class RedesController {
 		return os;
 	}
 
-	public String callProcess(String process) {
+	public String callProcess(String process, String adapterSubstringStart, String adapterSubstringEnd,
+			String ipSubstringStart, String ipSubstringEnd, String containsAdapterIdentifier,
+			String containsIpIdentifier) {
 		String message = "";
 		String adapter = "";
 		String ip = "";
@@ -23,25 +25,33 @@ public class RedesController {
 			BufferedReader buffer = new BufferedReader(reader);
 			String row = buffer.readLine();
 			while (row != null) {
+				if (process.contains("ip")) {
+					if (row.contains(containsAdapterIdentifier)) {
+						adapter = row.substring(row.indexOf(adapterSubstringStart),
+								row.lastIndexOf(adapterSubstringEnd));
+					} else if (row.contains(containsAdapterIdentifier)) {
+						adapter = row;
+					}
 
-				if (row.contains("enp") || row.contains("wlp")) {
-					adapter = row.substring(0, (row.indexOf(":")));
-				} else if(row.contains("Adaptador")){
-					adapter = row;
+					if (row.contains(containsIpIdentifier)) {
+						ip = row.substring(row.indexOf(ipSubstringStart) + 1, row.lastIndexOf(ipSubstringEnd));
+					} else if (row.contains(containsIpIdentifier)) {
+						ip = row;
+					}
+
+					if (adapter != "" && ip != "") {
+						message += adapter.trim() + ": " + ip.trim() + "\n";
+						ip = "";
+
+					}
+					row = buffer.readLine();
+				}else {
+					if(process.contains("-n")) {
+						
+					}else if(process.contains("-c")) {
+						
+					}
 				}
-
-				if (row.contains("inet ")) {
-					ip = row.substring(0, (row.lastIndexOf(" netmask")));
-				} else if(row.contains("IPv4")){
-					ip = row;
-				}
-
-				if (adapter != "" && ip != "") {
-					message += adapter.trim() + ": " + ip.trim() + "\n";
-					ip = "";
-
-				}
-				row = buffer.readLine();
 			}
 			buffer.close();
 			reader.close();
@@ -57,25 +67,40 @@ public class RedesController {
 
 		if (os.contains("Windows")) {
 			String process = "ipconfig";
-			String adapter = "";
-			String ip = "";
+			String adapterSubstringStart = "Adaptador";
+			String adapterSubstringEnd = ":";
+			String ipSubstringStart = ": ";
+			String ipSubstringEnd = "";
+			String containsAdapterIdentifier = "Adaptador";
+			String containsIpIdentifier = "IPv4";
 
-			System.out.println(callProcess(process));
+			System.out.println(callProcess(process, adapterSubstringStart, adapterSubstringEnd, ipSubstringStart,
+					ipSubstringEnd, containsAdapterIdentifier, containsIpIdentifier));
 
 		} else if (os.contains("Linux")) {
-			String process = "ifconfig";
+			String process = "ip address";
+			String adapterSubstringStart = " ";
+			String adapterSubstringEnd = ":";
+			String ipSubstringStart = "t ";
+			String ipSubstringEnd = "/";
+			String containsAdapterIdentifier = "mtu";
+			String containsIpIdentifier = "inet ";
 
-			System.out.println(callProcess(process));
-
-		} else if (os.contains("Mac")) {
+			System.out.println(callProcess(process, adapterSubstringStart, adapterSubstringEnd, ipSubstringStart,
+					ipSubstringEnd, containsAdapterIdentifier, containsIpIdentifier));
 
 		} else {
 			System.out.println("SO não reconhecido");
 		}
-
 	}
 
-	public void ping() {
+	public void ping(String os) {
+		String process;
+		if(os.contains("Windows")) {
+			process = "ping -n 10 ";
+		}else if(os.contains("Linux")) {
+			process = "ping -c 10 google.com";
+		}
 
 	}
 }

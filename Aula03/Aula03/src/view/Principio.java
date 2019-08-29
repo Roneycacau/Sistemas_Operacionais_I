@@ -11,7 +11,7 @@ public class Principio {
 //
         System.out.println(so);
 //
-        String processo = "tasklist /fo table";
+        String processo = "ip a";
 //
 //        pc.chamaProcesso(processo);
         pc.leProcesso(processo);

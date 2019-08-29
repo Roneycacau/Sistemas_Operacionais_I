@@ -19,6 +19,9 @@ public class Main {
 			case 1:
 				controller.ip(os);
 				break;
+			case 2: 
+				controller.ping(os);
+				break;
 			case 9: 
 				System.out.println("Tchau o/");
 				break;

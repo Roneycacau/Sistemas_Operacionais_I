@@ -43,7 +43,18 @@ public class ProController {
         
         
     } 
-    
+    public String bla (String linha, BufferedReader buffer) {
+    	while(linha != null ) {
+			System.out.println(linha);
+			try {
+				linha = buffer.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return linha;
+    }
     public void leProcesso(String processo) {
     	try {
 			Process p = Runtime.getRuntime().exec(processo);
@@ -51,10 +62,7 @@ public class ProController {
 			InputStreamReader leitor = new InputStreamReader(fluxo);
 			BufferedReader buffer = new BufferedReader(leitor);
 			String linha = buffer.readLine();
-			while(linha != null ) {
-				System.out.println(linha);
-				linha = buffer.readLine();
-			}
+			bla(linha, buffer);
 			buffer.close();
 			leitor.close();
 			fluxo.close();		
