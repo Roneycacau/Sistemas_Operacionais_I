@@ -86,17 +86,16 @@ public class RedesController {
 					System.out.print("Calculando");
 					while (row != null) {
 						System.out.print(".");
-						if(row.contains("dia")) {
+						if (row.contains("dia")) {
 							System.out.println("DONE");
-							String latencia = row.substring(row.lastIndexOf("="));
-							System.out.println(latencia.trim());
+							System.out.println("Latência: " + row.substring(row.lastIndexOf("=")));
+						}
 						try {
 							row = buffer.readLine();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 					}
-				}
 				} else if (process.contains("-c")) {
 					System.out.print("Calculando");
 					while (row != null) {
@@ -134,7 +133,8 @@ public class RedesController {
 	public void ping(String os) {
 		String process = "";
 		if (os.contains("Windows")) {
-			process = "ping -n 10 ";
+			process = "ping -n 10 www.google.com";
+			System.out.println(callProcess(process, os));
 		} else if (os.contains("Linux")) {
 			process = "ping -c 10 google.com";
 			System.out.println(callProcess(process, os));

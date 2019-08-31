@@ -9,7 +9,7 @@ ___
  
 ---
 ## Aula 02
- - aula teórica
+ - Aula teórica sobre processos
  ---
   
  ---
@@ -17,7 +17,11 @@ ___
   - Executando e lendo processos.
   - Entendendo como trabalar com String
  ---
-  
+ ---
+ ## Aula 4
+   - Entendendo Threads
+   - Trabalhando com Threads
+       - No exercício criamos 10 threads que calculam o valor de pi
  ---
  ## Exercícios
   - Aula03: Trabalho com processos do Sistema Operacional.

@@ -20,6 +20,7 @@ public class Main {
 				controller.ip(os);
 				break;
 			case 2: 
+				System.out.println("Site www.google.com");
 				controller.ping(os);
 				break;
 			case 9: 
