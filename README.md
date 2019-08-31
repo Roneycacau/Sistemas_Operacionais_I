@@ -18,7 +18,7 @@ ___
   - Entendendo como trabalar com String
  ---
  ---
- ## Aula 4
+ ## Aula 04
    - Entendendo Threads
    - Trabalhando com Threads
        - No exercício criamos 10 threads que calculam o valor de pi
