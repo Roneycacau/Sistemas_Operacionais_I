@@ -11,10 +11,10 @@ public class Principio {
 //
         System.out.println(so);
 //
-        String processo = "ip a";
+        String processo = "cmd.exe";
 //
-//        pc.chamaProcesso(processo);
-        pc.leProcesso(processo);
+        pc.chamaProcesso(processo);
+//        pc.leProcesso(processo);
         
 //        String param = "Notepad.exe";
         
