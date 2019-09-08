@@ -39,6 +39,8 @@ ___
   - Aula04: Trabalho com Threads.
       * 1 Fazer uma aplicação que rode 5 Threads que cada uma delas imprima no console o seu número.
       * 2 Fazer uma aplicação que insira números aleatórios em uma matriz 3 x 5 e tenha 3 Threads, onde cada Thread calcula a soma dos valores de cada linha, imprimindo a identificação da linha e o resultado da soma.
+      * 3 Corrida de sapos, 5 sapos, cada um em uma thread, mostrando o quanto andou e a ordem de chegada
+      * 4 Drag race. Dois carros disputado uma corrida de arrancada. Deve mostrar o vencedor e o perdedor. Como extra pretendo adicionar o registro das corridas passadas
 
    - Aula 05: Semáforo.
         
