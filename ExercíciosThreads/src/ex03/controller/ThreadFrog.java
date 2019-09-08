@@ -63,10 +63,6 @@ public class ThreadFrog extends Thread {
 	}
 
 	private void race() {
-		Rectangle startLine = lbFrog.getBounds();
-		lbFrog.setBounds(startLine);
-		System.out.println("Sapo " + f + "\n");
-
 		btnIniciar.setEnabled(false);
 		Rectangle position;
 		position = lbFrog.getBounds();

@@ -41,6 +41,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		setResizable(false);
 
 		Semaphore farol = new Semaphore(1);
 		
