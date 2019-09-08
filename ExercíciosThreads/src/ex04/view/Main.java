@@ -84,7 +84,6 @@ public class Main extends JFrame {
 		contentPane.add(lblLoser);
 
 		txtWinner = new JTextField();
-		txtWinner.setEnabled(false);
 		txtWinner.setEditable(false);
 		txtWinner.setBounds(96, 261, 96, 20);
 		contentPane.add(txtWinner);
@@ -92,7 +91,6 @@ public class Main extends JFrame {
 
 		txtLoser = new JTextField();
 		txtLoser.setEditable(false);
-		txtLoser.setEnabled(false);
 		txtLoser.setBounds(96, 310, 96, 20);
 		contentPane.add(txtLoser);
 		txtLoser.setColumns(10);

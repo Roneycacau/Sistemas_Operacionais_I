@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class RaceController implements ActionListener{
+public class RaceController implements ActionListener {
 	private JLabel lbCarro1;
 	private JLabel lbCarro2;
 	private JButton btnGo;
@@ -21,10 +21,13 @@ public class RaceController implements ActionListener{
 	private JTextField racerName1;
 	private JTextField racerName2;
 	private JButton btnReset;
-	
+
+	private Thread t1;
+	private Thread t2;
 
 	public RaceController(JLabel lbCarro1, JLabel lbCarro2, JButton btnGo, JTextField txtWinner, JTextField txtLoser,
-			JTextArea txtAreaWin, JTextArea txtAreaLose, JLabel labelFinish, JTextField racerName1, JTextField racerName2, JButton btnReset) {
+			JTextArea txtAreaWin, JTextArea txtAreaLose, JLabel labelFinish, JTextField racerName1,
+			JTextField racerName2, JButton btnReset) {
 		this.lbCarro1 = lbCarro1;
 		this.lbCarro2 = lbCarro2;
 		this.btnGo = btnGo;
@@ -37,27 +40,33 @@ public class RaceController implements ActionListener{
 		this.racerName2 = racerName2;
 		this.btnReset = btnReset;
 	}
-	
 
 	private void startRace() {
-		if(!racerName1.getText().isEmpty()) {
-			if(!racerName2.getText().isEmpty()) {
-				Thread t1 = new ThreadRace(lbCarro1, btnGo, txtWinner, txtLoser, txtAreaWin, txtAreaLose, labelFinish, racerName1,btnReset);
-				Thread t2 = new ThreadRace(lbCarro2, btnGo, txtWinner, txtLoser, txtAreaWin, txtAreaLose, labelFinish, racerName2,btnReset);
+		if (!racerName1.getText().isEmpty()) {
+			if (!racerName2.getText().isEmpty()) {
+				t1 = new ThreadRace(lbCarro1, btnGo, txtWinner, txtLoser, txtAreaWin, txtAreaLose, labelFinish,
+						racerName1, btnReset, t1);
+				t2 = new ThreadRace(lbCarro2, btnGo, txtWinner, txtLoser, txtAreaWin, txtAreaLose, labelFinish,
+						racerName2, btnReset, t2);
 				t1.start();
 				t2.start();
-			}else {
-				JOptionPane.showMessageDialog(null, "Digite o Nome do Corredor 2","Erro", JOptionPane.ERROR_MESSAGE);
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Digite o Nome do Corredor 2", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
-		}else {
-			JOptionPane.showMessageDialog(null, "Digite o Nome do Corredor 1","Erro", JOptionPane.ERROR_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "Digite o Nome do Corredor 1", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public void resetRace() {
 		lbCarro1.setBounds(0, 35, 192, 65);
 		lbCarro2.setBounds(0, 143, 192, 65);
+		txtWinner.setText(null);
+		txtLoser.setText(null);
+		btnGo.setVisible(true);
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		startRace();
