@@ -53,7 +53,7 @@ public class Main extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lbFrog1 = new JLabel("");
-		lbFrog1.setIcon(new ImageIcon("C:\\Users\\roney\\OneDrive - Fatec Centro Paula Souza\\Faculdade\\SO I\\Sistemas_Operacionais_I\\ExercíciosThreads\\src\\ex03\\img\\frogIcon.gif"));
+		lbFrog1.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\ex03\\img\\frogIcon.gif"));
 		lbFrog1.setBounds(10, 11, 100, 93);
 		contentPane.add(lbFrog1);
 		

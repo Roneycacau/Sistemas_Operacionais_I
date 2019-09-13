@@ -44,6 +44,7 @@ public class RaceController implements ActionListener {
 	private void startRace() {
 		if (!racerName1.getText().isEmpty()) {
 			if (!racerName2.getText().isEmpty()) {
+				btnReset.setVisible(false);
 				t1 = new ThreadRace(lbCarro1, btnGo, txtWinner, txtLoser, txtAreaWin, txtAreaLose, labelFinish,
 						racerName1, btnReset, t1);
 				t2 = new ThreadRace(lbCarro2, btnGo, txtWinner, txtLoser, txtAreaWin, txtAreaLose, labelFinish,
@@ -64,12 +65,16 @@ public class RaceController implements ActionListener {
 		lbCarro2.setBounds(0, 143, 192, 65);
 		txtWinner.setText(null);
 		txtLoser.setText(null);
+		btnReset.setVisible(false);
 		btnGo.setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		startRace();
-		resetRace();
+		if (btnGo.isVisible()) {
+			startRace();
+		} else {
+			resetRace();
+		}
 	}
 }

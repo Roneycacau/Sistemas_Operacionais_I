@@ -33,7 +33,8 @@ public class SpinThread extends Thread {
 	
 	private String filename = "jackpot.txt";
 
-	
+	private static int count;
+	private static int[] slots = new int[3];
 	
 	private Semaphore farol = new Semaphore(1);
 	
@@ -56,22 +57,27 @@ public class SpinThread extends Thread {
 	}
 	
 		
-	private int spinning() {
+	private void spinning() {
 		
 		
-		btnSpin.setEnabled(false);
-		int spins = r.nextInt(10)+1;
-		for(int i = 0; i<spins;i++) {
-			slot.setText((r.nextInt(2)+1) + "");
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		while (count<4) {
+			btnSpin.setEnabled(false);
+			int spins = r.nextInt(10) + 1;
+			for (int i = 0; i < spins; i++) {
+				slot.setText((r.nextInt(2) + 1) + "");
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			System.out.println("!! " + slot.getText() + " !!");
+			slots[count] = Integer.parseInt(slot.getText());
+			count++;
 		}
-		System.out.println("!! " + slot.getText() + " !!");
-		return Integer.parseInt(slot.getText());
+		checkWin(slots);
+		
 	}
 	
 	
@@ -87,6 +93,66 @@ public class SpinThread extends Thread {
 		btnSpin.setEnabled(true);
 	}
 	
+	
+	private void checkWin(int[] slots) {
+//		int s1 = Integer.parseInt(slot1.getText());
+//		int s2 = Integer.parseInt(slot2.getText());
+//		int s3 = Integer.parseInt(slot3.getText());
+		
+		int s1 = slots[0];
+		int s2 = slots[1];
+		int s3 = slots[2];
+		
+		if(s1 == s2 && s2 == s3) {
+			System.out.println("VENCEDOR!");
+			prize(slots[0]);
+		}
+	}
+	
+	private void prize(int num) {
+		switch (num) {
+		case 1:
+			win = 1;
+			break;
+		case 2:
+			win = 10;
+			jackpot -= win;
+			break;
+		case 3:
+			win = 50;
+			break;
+		case 4:
+			win = 100;
+			break;
+		case 5:
+			win = 250;
+			break;
+		case 6:
+			win = 500;
+			break;
+		case 7:
+			win = jackpot;
+			break;
+		default:
+			break;
+		}
+		System.out.println("selecionado valor do premio: " + win);
+		pay(win);
+	}
+
+	private void pay(double win2) {
+		jackpot -= win;
+		System.out.println("descontado valor do premio do jackpot> " + jackpot);
+		credit += win;
+		System.out.println("adicionado valor do premio em creditos: " + credit);
+		txtcredit.setText(credit + "");
+		register(jackpot, win, credit);
+	}
+
+
+	private void register(double jackpot2, double win2, double credit2) {
+		System.out.println("~~~~~~" + jackpot2 + "~~~~~~");
+	}
 
 
 	@Override

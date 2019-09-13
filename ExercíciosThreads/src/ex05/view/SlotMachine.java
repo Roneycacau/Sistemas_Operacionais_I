@@ -198,7 +198,6 @@ public class SlotMachine extends JFrame {
 		SpinController spin = new SpinController(btnSpin, btnAutoSpin, btnBet, btnMaxBet, btnSpin2win, txtjackpot,
 				txtcredit, txtwin, txtbetPrice, slot1, slot2, slot3);
 		btnSpin.addActionListener(spin);
-		btnBet.addActionListener(spin);
 
 	}
 }
