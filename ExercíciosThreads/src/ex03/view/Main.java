@@ -58,27 +58,27 @@ public class Main extends JFrame {
 		contentPane.add(lbFrog1);
 		
 		JLabel lbFrog2 = new JLabel("");
-		lbFrog2.setIcon(new ImageIcon("C:\\Users\\roney\\OneDrive - Fatec Centro Paula Souza\\Faculdade\\SO I\\Sistemas_Operacionais_I\\ExercíciosThreads\\src\\ex03\\img\\frogIcon.gif"));
+		lbFrog2.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\ex03\\img\\frogIcon.gif"));
 		lbFrog2.setBounds(10, 118, 100, 93);
 		contentPane.add(lbFrog2);
 		
 		JLabel lbFrog3 = new JLabel("");
-		lbFrog3.setIcon(new ImageIcon("C:\\Users\\roney\\OneDrive - Fatec Centro Paula Souza\\Faculdade\\SO I\\Sistemas_Operacionais_I\\ExercíciosThreads\\src\\ex03\\img\\frogIcon.gif"));
+		lbFrog3.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\ex03\\img\\frogIcon.gif"));
 		lbFrog3.setBounds(10, 223, 100, 93);
 		contentPane.add(lbFrog3);
 		
 		JLabel lbFrog4 = new JLabel("");
-		lbFrog4.setIcon(new ImageIcon("C:\\Users\\roney\\OneDrive - Fatec Centro Paula Souza\\Faculdade\\SO I\\Sistemas_Operacionais_I\\ExercíciosThreads\\src\\ex03\\img\\frogIcon.gif"));
+		lbFrog4.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\ex03\\img\\frogIcon.gif"));
 		lbFrog4.setBounds(10, 327, 100, 93);
 		contentPane.add(lbFrog4);
 		
 		JLabel lbFrog5 = new JLabel("");
-		lbFrog5.setIcon(new ImageIcon("C:\\Users\\roney\\OneDrive - Fatec Centro Paula Souza\\Faculdade\\SO I\\Sistemas_Operacionais_I\\ExercíciosThreads\\src\\ex03\\img\\frogIcon.gif"));
+		lbFrog5.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\ex03\\img\\frogIcon.gif"));
 		lbFrog5.setBounds(10, 431, 100, 93);
 		contentPane.add(lbFrog5);
 		
 		JLabel lbFinish = new JLabel("");
-		lbFinish.setIcon(new ImageIcon("C:\\Users\\roney\\OneDrive - Fatec Centro Paula Souza\\Faculdade\\SO I\\Sistemas_Operacionais_I\\ExercíciosThreads\\src\\ex03\\img\\Webp.net-resizeimage (5).png"));
+		lbFinish.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\ex03\\img\\Webp.net-resizeimage (5).png"));
 		lbFinish.setBounds(738, 11, 10, 526);
 		contentPane.add(lbFinish);
 		
