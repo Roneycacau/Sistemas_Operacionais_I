@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 public class SpinController implements ActionListener {
 
+	private JButton btn;
 	private JButton btnSpin;
 	private JButton btnAutoSpin;
 	private JButton btnBet;

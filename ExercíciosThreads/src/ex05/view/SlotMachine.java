@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import ex05.controller.ButtonController;
 import ex05.controller.SpinController;
 
 public class SlotMachine extends JFrame {
@@ -37,6 +38,7 @@ public class SlotMachine extends JFrame {
 	private JButton btnMaxBet;
 	private JButton btnSpin2win;
 	private String filename;
+	private JButton btn;
 
 	/**
 	 * Launch the application.
@@ -195,8 +197,7 @@ public class SlotMachine extends JFrame {
 		btnSpin2win.setBounds(359, 322, 156, 67);
 		contentPane.add(btnSpin2win);
 
-		SpinController spin = new SpinController(btnSpin, btnAutoSpin, btnBet, btnMaxBet, btnSpin2win, txtjackpot,
-				txtcredit, txtwin, txtbetPrice, slot1, slot2, slot3);
+		ButtonController spin = new ButtonController(btn, txtjackpot, txtcredit, txtwin, txtbetPrice, slot1, slot2, slot3);
 		btnSpin.addActionListener(spin);
 
 	}
